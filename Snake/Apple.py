@@ -1,17 +1,23 @@
 import pygame
 
 class Apple:
-    RED = 0
-    BLUE = 0
+    RED = (175,60,50)
+    BLUE = (100,90,175)
 
 
-    def __init__(self, x, y, good=True):
+    def __init__(self, x, y, window, good=True):
         self.x = x
         self.y = y
         self.good = good
+        self.window = window
 
     def draw(self):
         '''
-        Draws the apple to the screen.
-        Red is good and adds score, blue is bad and subtracts score.
+        Draws the apple.
+        If the apple is good, it is drawn in red.
+        If the apple is bad, it is drawn in blue.
         '''
+        if self.good == True:
+            pygame.draw.circle(self.window, Apple.RED, (self.x, self.y), 10)
+        else:
+            pygame.draw.circle(self.window, Apple.BLUE, (self.x, self.y), 10)
