@@ -29,8 +29,6 @@ class Game:
         for apple in self.apples:
             apple.draw()
         
-      
-
     def loop(self):
         """
         Executes a single game loop.
