@@ -49,6 +49,10 @@ class Game:
         if keys[pygame.K_ESCAPE]:
             pygame.event.post(pygame.event.Event(pygame.QUIT))
 
+
+        if len(self.apples) <= 3:
+            self.apples.append(Apple.Apple(self.window, self.width, self.height))
+        
         self.draw()
 
     def draw_score(self):
