@@ -102,13 +102,13 @@ class PongGame:
             pygame.display.update()
         pygame.quit()
 
-    #
-    # Build two networks from given genomes
-    # and test them against each other
-    # if one of the paddles misses, end game and add hits number
-    # to fitness of each genome
-    #
     def train_ai(self, genome1, genome2, config):
+        '''
+        Build two networks from given genomes
+        and test them against each other
+        if one of the paddles misses, end game and add hits number
+        to fitness of each genome
+        '''
         net1 = neat.nn.FeedForwardNetwork.create(genome1, config)
         net2 = neat.nn.FeedForwardNetwork.create(genome2, config)
 
@@ -165,7 +165,6 @@ class PongGame:
         genome1.fitness += game_info.left_hits
         genome2.fitness += game_info.right_hits
 
-
 def eval_genomes(genomes, config):
     # each ai will play against every other ai
     width, height = 700, 500
@@ -181,7 +180,6 @@ def eval_genomes(genomes, config):
             game = PongGame(window, width, height)
 
             game.train_ai(genome1, genome2, config)
-
 
 def run_neat(config):
     # To restore from a checkpoint instead of creating a new
@@ -200,7 +198,6 @@ def run_neat(config):
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
 
-
 def test_ai(config):
     width, height = 700, 500
     window = pygame.display.set_mode((width, height))
@@ -210,7 +207,6 @@ def test_ai(config):
 
     game = PongGame(window, width, height)
     game.test_ai(winner, config)
-
 
 def aiFight(config):
     width, height = 700, 500
