@@ -13,7 +13,6 @@ def SnakeGame():
 
     running = True
     while running:
-        clock.tick(60)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -23,6 +22,7 @@ def SnakeGame():
 
         game.loop()
         pygame.display.update()
+        clock.tick(5)
 
 
 if __name__ == "__main__":

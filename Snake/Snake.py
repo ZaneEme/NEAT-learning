@@ -1,42 +1,40 @@
+from tkinter import W
 import pygame
 import COLORS
 
 class Snake:
-    def __init__(self, window, x, y, length=3):
+    def __init__(self, window, width, height, length=3):
         self.length = length
-        self.x = x
-        self.y = y
+        self.x = width // 2
+        self.y = height // 2
         self.body = []
         self.window = window
-        self.direction = 0
+        self.direction = 1
         self.green = COLORS.GREEN
 
-        for i in range(1, length):
+        for i in range(1, length + 1):
             self.body.append(SnakeSegment(window, self.x + (25 * i), self.y))
 
     def move(self):
         """
         Moves the entire snake one space
         """
-        for i in range(len(self.body) - 1, 0, -1):
-            self.body[i].x = self.body[i - 1].x
-            self.body[i].y = self.body[i - 1].y
         if self.direction == 0:
-            self.body[0].x += 1
+            self.body[0].y -= 25
         elif self.direction == 1:
-            self.body[0].y += 1
+            self.body[0].x += 25
         elif self.direction == 2:
-            self.body[0].x -= 1
+            self.body[0].y += 25
         elif self.direction == 3:
-            self.body[0].y -= 1
-        else:
-            raise ValueError("Invalid direction")
+            self.body[0].x -= 25
+
+        self.body.pop(-1)
 
     def eat(self):
         """
         Adds a new segment to the snake.
         """
-        self.body.append(SnakeSegment(self.body[-1].x, self.body[-1].y))
+        self.body.insert(0, SnakeSegment(self.window, (self.body[0].x), self.body[0].y))
 
     def turn(self, direction=0):
         """
@@ -62,4 +60,5 @@ class SnakeSegment:
         """
         Draws the snake segment to the screen.
         """
+        # pygame.draw.rect(self.window, COLORS.GREEN, (400, 400, 100, 100))
         pygame.draw.rect(self.window, COLORS.GREEN, pygame.Rect(self.x, self.y, 25, 25))
