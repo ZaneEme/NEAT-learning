@@ -1,7 +1,8 @@
 class Board:
-    def __init__(self, width, height):
+    def __init__(self, screen, width, height):
         self.width = width
         self.height = height
+        self.screen = screen
     
     
     def build(self):

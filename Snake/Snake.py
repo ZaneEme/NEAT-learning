@@ -1,11 +1,14 @@
+import pygame
+
 class Snake:
-    def __init__(self, x, y, length = 3):
+    def __init__(self, screen, x, y, length = 3):
         self.length = length
         self.body = []
+        self.screen = screen
         self.direction = 0
 
         for i in range(1, length):
-            self.body.append(SnakeSegment(x - i, y))
+            self.body.append(SnakeSegment(x + i, y))
 
     def move(self):
         '''
@@ -24,7 +27,7 @@ class Snake:
             self.body[0].y -= 1
         else:
             raise ValueError("Invalid direction")
-            
+
 
     def eat(self):
         '''
@@ -44,11 +47,13 @@ class Snake:
         '''
 
 class SnakeSegment:
-    def __init__(self, x, y):
+    def __init__(self, screen, x, y):
         self.x = x
         self.y = y
+        self.screen = screen
 
     def draw(self):
         '''
         Draws the snake segment to the screen.
         '''
+        pygame.draw.square(self.screen, (0,0,0), (self.x, self.y), 10)
